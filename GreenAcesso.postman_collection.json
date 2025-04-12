@@ -1,0 +1,180 @@
+{
+	"info": {
+		"_postman_id": "71a3fca2-8f7f-4adb-a590-c9745dc3e766",
+		"name": "Desafio Green Acesso",
+		"description": "Para ter acesso aos documentos necessários para testes e mais informações sobre o projeto accesse o repositório no github: [https://github.com/matheusrizzati/desafio-backend-green-acesso](https://github.com/matheusrizzati/desafio-backend-green-acesso)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25271115"
+	},
+	"item": [
+		{
+			"name": "/lotes",
+			"item": [
+				{
+					"name": "(Criar Lote)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"0019\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/lotes",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"lotes"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "/boletos",
+			"item": [
+				{
+					"name": "(Criar Boleto)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome_sacado\": \"Mauricio\",\r\n    \"id_lote\": 1,\r\n    \"valor\": 182.5,\r\n    \"linha_digitavel\": \"123456123456123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/boletos",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"boletos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "(Importar CSV)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "c:\\Users\\mathe\\OneDrive\\Área de Trabalho\\desafio-green-acesso.csv"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/boletos/csv",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"boletos",
+								"csv"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "(Separar PDF)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "c:\\Users\\mathe\\Documents\\desafio-green-acesso\\DOCS_PARA_USO\\desafio_green_acesso-fakepdf.pdf"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/boletos/pdf",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"boletos",
+								"pdf"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "(Buscar)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/boletos?relatorio=1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"boletos"
+							],
+							"query": [
+								{
+									"key": "nome",
+									"value": "Marcia",
+									"disabled": true
+								},
+								{
+									"key": "valor_inicial",
+									"value": "130",
+									"disabled": true
+								},
+								{
+									"key": "valor_final",
+									"value": "180",
+									"disabled": true
+								},
+								{
+									"key": "id_lote",
+									"value": "2",
+									"disabled": true
+								},
+								{
+									"key": "relatorio",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Se o parâmetro \"relatorio\" estiver presente ele irá retornar um base64 referente a um pdf com os items filtrados;  \n  \nCaso o parâmetro \"relatorio\" não esteja presente, retornará normalmente um json com os resultados."
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:3000",
+			"type": "string"
+		}
+	]
+}
