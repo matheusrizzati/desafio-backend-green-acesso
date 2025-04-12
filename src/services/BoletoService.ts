@@ -198,7 +198,12 @@ export class BoletoService {
                     throw new HttpError(`Não existe nenhum boleto para o nome ${ORDEM_FIXA_PDF[i]} no banco de dados`);
                 }
                 
-                fs.writeFileSync(`./boletosPdfs/${boleto?.id}.pdf`, pdfByte);
+                const dir = './boletosPdfs'
+                if(!fs.existsSync(dir)){
+                    fs.mkdirSync(dir)
+                }
+
+                fs.writeFileSync(`${dir}/${boleto?.id}.pdf`, pdfByte);
             }
             return true
         } catch {
